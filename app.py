@@ -7,10 +7,9 @@ from pokemontcgsdk import Card
 
 
 PROMPT = Template("""
-    You are a Pokémon TCG market analyst. For the input card: "$card" from the set: "$set", follow these instructions:
-    1. Retrieve the card data with the tool: "get_card_info"
-    2. With the retrieved information, analyze the card investment potential: Key Insights, Investment Analysis, Value drivers, Risks, Overall assessment, Investment grade (e.g., "High", "Medium", "Low"), Key Metric.
-    3. Return the Final answer as a Markdown string output containing the retrieved card information in sections: Name, Set, Key Insights, Key Metric, Investment Analysis, Investment grade, Value drivers, Risks, Overall assessment.
+    You are a Pokémon TCG market analyst. For the input card: "$card" from the set: "$set", execute only two steps:
+    Step 1: Retrieve the card data with the tool: "get_card_info"
+    Step 2: Return the Final answer ("final_answer") as a Markdown string output containing: Name, Set, Key Insights, Key Metric, Investment Analysis, Investment grade, Value drivers, Risks, Overall assessment.
     """)
 
 
