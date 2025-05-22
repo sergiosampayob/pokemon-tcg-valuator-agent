@@ -1,0 +1,4 @@
+smolagents[all]
+gradio
+numpy
+pokemontcgsdk
