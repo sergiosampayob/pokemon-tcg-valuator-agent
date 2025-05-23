@@ -1,8 +1,8 @@
 ---
-title: Pokemon Tcg Valuator
-emoji: 🚀
-colorFrom: red
-colorTo: gray
+title: Pokemon TCG Valuator Agent
+emoji: 🤑
+colorFrom: blue
+colorTo: orange
 sdk: gradio
 sdk_version: 5.30.0
 app_file: app.py
