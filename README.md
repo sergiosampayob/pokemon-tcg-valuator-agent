@@ -1,6 +1,6 @@
 ---
 title: Pokemon TCG Valuator Agent
-emoji: 🤑
+emoji: 🃏🤑
 colorFrom: blue
 colorTo: purple
 sdk: gradio
