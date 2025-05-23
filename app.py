@@ -9,7 +9,7 @@ from pokemontcgsdk import Card  # type: ignore
 PROMPT = Template("""
     You are a Pokémon TCG market analyst. For the input card: "$card" from set name: "$set_name", set series: "$set_series", set number: "$number", execute only two steps:
     Step 1: Retrieve the card data with the tool: "get_card_info"
-    Step 2: Return the Final answer ("final_answer") as a Markdown string output containing: Name, Set, Key Insights, Key Metric, Investment Analysis, Investment grade, Value drivers, Risks, Overall assessment.
+    Step 2: Return the Final answer ("final_answer") as a Markdown string output containing: Name, Set, Key Insights, Key Metrics, Investment Analysis, Investment grade, Value drivers, Risks, Overall assessment.
     """)
 
 
@@ -217,8 +217,8 @@ def run_app(card_name: str, set_name: str, set_series: str, number: str) -> tupl
 
 if __name__ == "__main__":
     print("Launching Gradio Interface for Pokemon TCG Valuator...")
-    with gr.Blocks() as demo:
-        theme="soft"
+    with gr.Blocks(theme='glass') as demo:
+        # Title and description
         gr.Markdown(
         """
         <!-- title only -->
@@ -229,45 +229,71 @@ if __name__ == "__main__":
         * The Pokémon TCG Card Valuator Agent uses the [Pokémon TCG API](https://docs.pokemontcg.io/) to fetch the card data from it and from Cardmarket and analyze its investment potential.\n
         * The agent provides insights on the card's investment potential, including:
             * Key insights
+            * Key Metrics
             * Investment Analysis
-            * Value drivers
             * Investment grade
-            *  Key Metric
+            * Value drivers
             *  Risks
             * Overall assessment
+        <br>
         """
         )
-        gr.Interface(           
+
+        # Input section
+        with gr.Row():
+            # Left Column - Inputs
+            with gr.Column():
+                gr.Markdown("### Card Details")
+                card_name = gr.Textbox(label="Card Name", value="Eevee EX")
+                set_name = gr.Textbox(label="Set Name", value="Prismatic Evolutions")
+                set_series = gr.Textbox(label="Set Series", value="Scarlet & Violet")
+                card_number = gr.Textbox(label="Card Number", value="167")
+                submit_btn = gr.Button("Valuate Card", variant="primary")
+
+            # Output section - DEFAULT IMAGE PRELOADED
+            with gr.Column():
+                    gr.Markdown("### Card Investment Report")
+                    card_image = gr.Image(
+                        value="https://images.pokemontcg.io/sv8pt5/167_hires.png",  # Preloads the image
+                        label="Card Image",
+                        height=400,
+                        interactive=False
+                    )
+                    report_md = gr.Markdown(
+                        value="""
+                        # Eevee EX - Prismatic Evolutions
+                        ## Name
+                        Eevee EX
+                        ## Set
+                        Prismatic Evolutions (Scarlet & Violet)
+                        ## Key Insights
+                        - *Rarity:* Special Illustration Rare
+                        - *Release Date:* January 17, 2025
+                        - *Printed Total:* 131 cards
+                        ## Key Metric
+                        - *Market Price (Holofoil):* $171.68
+                        - *Low Price (Holofoil):* $154.99
+                        - *Mid Price (Holofoil):* $180.98
+                        - *High Price (Holofoil):* $360.68
+                        ## Investment Analysis
+                        - *Investment Grade:* High
+                        - *Value Drivers:*
+                            - Limited print run (131 cards)
+                            - Special Illustration Rare rarity
+                            - High demand for EX cards
+                        - *Risks:*
+                            - Market volatility due to limited supply
+                            - Potential for price drops if new sets are released
+                        ## Overall Assessment
+                        Eevee EX from the Prismatic Evolutions set is a high-value card with a limited print run and high rarity. The market price is currently strong, and the card is likely to maintain its value due to its rarity and popularity. However, investors should be aware of market volatility and potential price fluctuations.
+                        """,
+                    )
+
+        # Update both image (keeps default) and report on click
+        submit_btn.click(
             fn=run_app,
-            inputs=[
-                gr.Textbox(
-                    label="Card Name",
-                    lines=1,
-                    value="Eevee EX",
-                ),
-                gr.Textbox(
-                    label="Set Name",
-                    lines=1,
-                    value="Prismatic Evolutions",
-                ),
-                gr.Textbox(
-                    label="Set Series",
-                    lines=1,
-                    value="Scarlet & Violet",
-                ),
-                gr.Textbox(
-                    label="Card Number",
-                    lines=1,
-                    value="167",
-                ),
-            ],
-            outputs=[
-                gr.Image(
-                    label="Card Valuation",
-                ),
-                gr.Markdown(
-                    label="Card Valuation",
-                ),
-            ]
+            inputs=[card_name, set_name, set_series, card_number],
+            outputs=[card_image, report_md]
         )
+
     demo.launch(debug=True, share=False)
