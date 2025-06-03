@@ -42,7 +42,7 @@ This will launch a Gradio web interface in your browser.
 
 You can try the app instantly on Hugging Face Spaces:
 
-[![Hugging Face Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/spaces.svg)](https://huggingface.co/spaces/sergiosampayo/pokemon-tcg-valuator-agent)
+[Hugging Face Spaces](https://huggingface.co/spaces/sergiosampayo/pokemon-tcg-valuator-agent)
 
 [https://huggingface.co/spaces/sergiosampayo/pokemon-tcg-valuator-agent](https://huggingface.co/spaces/sergiosampayo/pokemon-tcg-valuator-agent)
 
