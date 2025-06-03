@@ -1,7 +1,5 @@
 # Pokemon TCG Valuator Agent
 
-🃏🤑
-
 ## Overview
 
 AI Agent to assess the current investment value of Pokémon TCG cards.
@@ -63,5 +61,3 @@ MIT
 - [Gradio](https://gradio.app/)
 - [Pokémon TCG API](https://docs.pokemontcg.io/)
 
----
-Feel free to open issues or pull requests to contribute!
